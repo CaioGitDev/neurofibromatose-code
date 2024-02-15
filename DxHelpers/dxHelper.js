@@ -20,10 +20,14 @@
                     },
                 };
 
+                if(fieldOptions.type === 'dxTextArea')
+                    field.colSpan = 2
+
                 switch (fieldOptions.type) {
                     case 'dxNumberBox':
                         field.editorOptions = {
                             //min: 0,
+                            value: null
                         }
                         break;
                     case 'dxCheckBox':

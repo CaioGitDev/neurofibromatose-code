@@ -10,8 +10,14 @@ const Neurofibromatose = (() => {
   const _formDefinition = formDefinition
 
   const init = () => {
+    preload();
     _buildFormSections(_formDefinition.form_sections)
   }
+
+  const preload = () => {
+    
+  }
+
 
   const _buildFormSections = (sections) => {
     sections.forEach(section => {
