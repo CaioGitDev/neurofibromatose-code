@@ -39,3 +39,57 @@ const educationLevelList = [
     value: "Superior"
   },
 ]
+
+const familyDegreeOfRelationList = [
+  {
+    id: 1,
+    value: "Irmão/ã"
+  },
+  {
+    id: 2,
+    value: "Mãe"
+  },
+  {
+    id: 3,
+    value: "Tio/a materno"
+  },
+  {
+    id: 4,
+    value: "Avó materna"
+  },
+  {
+    id: 5,
+    value: "Avô materno"
+  },
+  {
+    id: 6,
+    value: "Pai"
+  },
+  {
+    id: 7,
+    value: "Tio/a paterno"
+  },
+  {
+    id: 8,
+    value: "Avó paterno"
+  },
+  {
+    id: 9,
+    value: "Avô paterno"
+  },
+  {
+    id: 7,
+    value: "Outro familiar"
+  },
+]
+
+const yesNoList = [
+  {
+    id: 1,
+    value: "Sim"
+  },
+  {
+    id: 0,
+    value: "Não"
+  },
+]

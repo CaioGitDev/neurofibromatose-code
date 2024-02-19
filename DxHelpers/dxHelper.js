@@ -233,6 +233,8 @@
 
             // defines datasource for list field
             if (value?.context) {
+                
+                
                 if (value?.controller) {
                     columnOptions.lookup.dataSource = DevExpress.data.AspNet.createStore({
                         key: "id",

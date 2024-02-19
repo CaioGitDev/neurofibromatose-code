@@ -5,9 +5,11 @@ const formDefinition = {
   "form_sections": [
     {
       "section_id": 1,
+      "section_parent_id": null,
       "section_name": "Clinical Identification",
       "section_description": "Identificação Clinica",
       "section_order": 1,
+      "section_type": "dxForm",
       "section_fields": [
         {
           "field_name": "sns_number",
@@ -97,8 +99,10 @@ const formDefinition = {
     },
     {
       "section_id": 2,
+      "section_parent_id": null,
       "section_name": "Patient Identification",
       "section_description": "Identificação do Paciente",
+      "section_type": "dxForm",
       "section_order": 2,
       "section_fields": [
         {
@@ -246,6 +250,70 @@ const formDefinition = {
           }
         },
       ]
-    }
+    },
+    {
+      "section_id": 3,
+      "section_parent_id": null,
+      "section_name": "Family Background",
+      "section_description": "Antecedentes Familiares",
+      "section_type": "dxDataGrid",
+      "section_order": 2,
+      "section_fields": [
+        {
+          "field_name": "family_degree_of_relation_id",
+          "field_description": "Grau de Parentesco",
+          "field_options": {
+            "type": "dxSelectBox",
+            "required": true,
+            "read_only": false,
+            "visible": true,
+            "context": familyDegreeOfRelationList,
+            "controller": null
+          }
+        },
+        {
+          "field_name": "family_neurofibromatosis_type_1",
+          "field_description": "Neurofibromatose Tipo 1",
+          "field_options": {
+            "type": "dxSelectBox",
+            "required": true,
+            "read_only": false,
+            "visible": true,
+            "context": yesNoList,
+            "controller": null
+          }
+        },
+        {
+          "field_name": "family_process_number",
+          "field_description": "Nº Processo",
+          "field_options": {
+            "type": "dxNumberBox",
+            "required": false,
+            "read_only": false,
+            "visible": true,
+            "context": null,
+            "controller": null
+          }
+        },
+      ]
+    },
+    {
+      "section_id": 4,
+      "section_parent_id": null,
+      "section_name": "Family Background",
+      "section_description": "Antecedentes Familiares",
+      "section_type": "dxDataGrid",
+      "section_order": 2,
+      "section_fields": [],
+    },
+    {
+      "section_id": 5,
+      "section_parent_id": 4,
+      "section_name": "Family Background",
+      "section_description": "Antecedentes Familiares",
+      "section_type": "dxDataGrid",
+      "section_order": 2,
+      "section_fields": [],
+    },
   ]
 }
