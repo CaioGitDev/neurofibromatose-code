@@ -4,6 +4,7 @@ DevExpress.config({
   editorStylingMode: 'underlined' //'filled' or 'outlined' | 'underlined'
 });
 
+
 const loadPanel = $('.load-panel').dxLoadPanel({
   shadingColor: 'rgba(0,0,0,0.4)',
   position: { of: '#form1' },
@@ -89,9 +90,7 @@ const Neurofibromatose = (() => {
   }
 
   const _buildSection = (section) => {
-    const sectionContainer = $(`<div id="section-id-${section.section_id}">
-    <h1>${section.section_description}</h1>
-    </div>`, {})
+    const sectionContainer = $(`<div id="section-id-${section.section_id}" class="pt-5">`, {})
 
 
     switch (section.section_type) {
@@ -176,6 +175,17 @@ const Neurofibromatose = (() => {
           },
         }).dxDataGrid('instance')
         break
+      case 'dxTabPanel':
+        sectionContainer.dxTabPanel({
+          dataSource: _buildTabPanelDataSource(section.nested_sections),
+          width: '100%',
+          height: '100%',
+          tabsPosition: 'left',
+          animationEnabled: true,
+          iconPosition: 'top',
+          itemTitleTemplate: (data) => data.title
+        }).dxTabPanel('instance')
+        break
     }
 
 
@@ -183,10 +193,45 @@ const Neurofibromatose = (() => {
     return sectionContainer
   }
 
-  const _buildField = (section_fields) => {
+
+  const _buildTabPanelDataSource = (nested_sections) => {
+    return nested_sections.map(section => {
+      return {
+        title: section.section_description,
+        template: () => {
+          const sectionContainer = $(`<div id="section-id-${section.section_id}" class="pt-5">`, {})
+          sectionContainer.dxForm({
+            labelLocation: 'top',
+            colCount: 2,
+            colSpan: 2,
+            showColonAfterLabel: true,
+            showValidationSummary: true,
+            formData: {},
+            items: [{
+              itemType: 'group',
+              caption: section.section_description,
+              colCount: 2,
+              colSpan: 2,
+              items: _buildField(section.section_fields, `section-id-${section.section_id}`)
+            }]
+          }).dxForm('instance')
+
+          return sectionContainer
+        }
+      }
+    })
+  }
+
+  const _buildField = (section_fields, formId) => {
+    
     let columnsToHide = []
     const fields = {}
     section_fields.forEach(field => {
+      
+      if (formId && field.field_options.field_side_effects) {
+        field.field_options.field_side_effects.push(formId)
+      }
+
       fields[field.field_name] = {
         name: field.field_description,
         type: field.field_options.type,
@@ -195,6 +240,7 @@ const Neurofibromatose = (() => {
         controller: field.field_options.controller,
         readOnly: field.field_options.read_only,
         disabled: field.field_options.disabled,
+        fieldSideEffects: field.field_options.field_side_effects,
       }
       if (!field.field_options.visible) {
         columnsToHide.push(field.field_name)
@@ -221,7 +267,7 @@ const Neurofibromatose = (() => {
       }
     })
 
-    console.log(DxHelper.buildDataGridColumnDefinition(fields, columnsToHide))
+    
     return DxHelper.buildDataGridColumnDefinition(fields, columnsToHide)
   }
 

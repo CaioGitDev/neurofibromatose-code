@@ -257,7 +257,7 @@ const formDefinition = {
       "section_name": "Family Background",
       "section_description": "Antecedentes Familiares",
       "section_type": "dxDataGrid",
-      "section_order": 2,
+      "section_order": 3,
       "section_fields": [
         {
           "field_name": "family_degree_of_relation_id",
@@ -300,20 +300,134 @@ const formDefinition = {
     {
       "section_id": 4,
       "section_parent_id": null,
-      "section_name": "Family Background",
-      "section_description": "Antecedentes Familiares",
-      "section_type": "dxDataGrid",
-      "section_order": 2,
-      "section_fields": [],
+      "section_name": "Personal Background",
+      "section_description": "Antecedentes Pessoais",
+      "section_type": "dxTabPanel",
+      "section_order": 4,
+      "nested_sections": [
+        {
+          "section_id": 5,
+          "section_parent_id": 4,
+          "section_name": "Personal Background",
+          "section_description": "Gravidez",
+          "section_type": "dxForm",
+          "section_order": 1,
+          "section_fields": [
+            {
+              "field_name": "pregnancy_consanguinity",
+              "field_description": "Consanguinidade",
+              "field_options": {
+                "type": "dxRadioGroup",
+                "required": true,
+                "read_only": false,
+                "visible": true,
+                "context": yesNoList,
+                "controller": null
+              }
+            },
+            {
+              "field_name": "pregnancy_watched",
+              "field_description": "Vigiada",
+              "field_options": {
+                "type": "dxRadioGroup",
+                "required": true,
+                "read_only": false,
+                "visible": true,
+                "context": yesNoList,
+                "controller": null,
+                "field_side_effects": ["pregnancy_watched_over", "pregnancy_watched_by"]
+              }
+            },
+            {
+              "field_name": "pregnancy_watched_over",
+              "field_description": "Vigiada em",
+              "field_options": {
+                "type": "dxTextBox",
+                "required": true,
+                "read_only": true,
+                "visible": true,
+                "context": null,
+                "controller": null
+              }
+            },
+            {
+              "field_name": "pregnancy_watched_by",
+              "field_description": "Vigiada por",
+              "field_options": {
+                "type": "dxTextBox",
+                "required": true,
+                "read_only": true,
+                "visible": true,
+                "context": null,
+                "controller": null
+              }
+            },
+            {
+              "field_name": "pregnancy_planned",
+              "field_description": "Planeada",
+              "field_options": {
+                "type": "dxRadioGroup",
+                "required": true,
+                "read_only": false,
+                "visible": true,
+                "context": yesNoList,
+                "controller": null
+              }
+            },
+            {
+              "field_name": "pregnancy_without_complications",
+              "field_description": "Com intercorrências",
+              "field_options": {
+                "type": "dxRadioGroup",
+                "required": true,
+                "read_only": false,
+                "visible": true,
+                "context": yesNoList,
+                "controller": null,
+                "field_side_effects": ["pregnancy_complicated_by"]
+              }
+            },
+            {
+              "field_name": "pregnancy_complicated_by",
+              "field_description": "Complicada por",
+              "field_options": {
+                "type": "dxTextBox",
+                "required": true,
+                "read_only": true,
+                "visible": true,
+                "context": null,
+                "controller": null
+              }
+            },
+            {
+              "field_name": "pregnancy_ultrasounds_without_changes",
+              "field_description": "Ecografias com alterações",
+              "field_options": {
+                "type": "dxRadioGroup",
+                "required": true,
+                "read_only": false,
+                "visible": true,
+                "context": yesNoList,
+                "controller": null,
+                "field_side_effects": ["pregnancy_ultrasounds_scans_with_changes"]
+              }
+            },
+            {
+              "field_name": "pregnancy_ultrasounds_scans_with_changes",
+              "field_description": "Ecografias com alterações",
+              "field_options": {
+                "type": "dxTextBox",
+                "required": true,
+                "read_only": true,
+                "visible": true,
+                "context": null,
+                "controller": null
+              }
+            },
+          ]
+        }
+      ]
     },
-    {
-      "section_id": 5,
-      "section_parent_id": 4,
-      "section_name": "Family Background",
-      "section_description": "Antecedentes Familiares",
-      "section_type": "dxDataGrid",
-      "section_order": 2,
-      "section_fields": [],
-    },
+
   ]
 }

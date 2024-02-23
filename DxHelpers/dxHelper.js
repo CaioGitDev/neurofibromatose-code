@@ -18,9 +18,10 @@
                     label: {
                         text: fieldOptions.name,
                     },
+
                 };
 
-                if(fieldOptions.type === 'dxTextArea')
+                if (fieldOptions.type === 'dxTextArea')
                     field.colSpan = 2
 
                 switch (fieldOptions.type) {
@@ -73,7 +74,7 @@
                     case 'dxRadioGroup':
                         field.editorOptions = {
                             valueExpr: 'id',
-                            displayExpr: 'text',
+                            displayExpr: 'value',
                             layout: 'horizontal',
                         }
                         break;
@@ -172,6 +173,24 @@
                     }
                 }
 
+
+                if (fieldOptions?.fieldSideEffects) {
+                    const lastIndex = fieldOptions.fieldSideEffects.length - 1;
+                    const formId = fieldOptions.fieldSideEffects[lastIndex];
+                    fieldOptions.fieldSideEffects.pop();
+
+                    field.editorOptions.onValueChanged = function (e) {
+                        const selectedValue = e.value === 1 ? true : false;
+
+                        fieldOptions.fieldSideEffects.forEach((field) => {
+                            const form = getDxFormInstanceByName(formId);
+                            const editor = form.getEditor(field);
+                            editor.option('readOnly', !selectedValue);
+                        })
+
+                    }
+                }
+
                 formItems.push(field);
             }
         }
@@ -233,8 +252,8 @@
 
             // defines datasource for list field
             if (value?.context) {
-                
-                
+
+
                 if (value?.controller) {
                     columnOptions.lookup.dataSource = DevExpress.data.AspNet.createStore({
                         key: "id",
